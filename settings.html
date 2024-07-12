@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CDN Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            width: 600px;
+            height: auto;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #343a40;
+        }
+        .custom-cdn {
+            width: calc(100% - 40px);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .custom-cdn div {
+            margin-bottom: 10px;
+            display: flex;
+        }
+        .custom-cdn input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+        .custom-cdn button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+            height: 38px;
+            box-sizing: border-box;
+        }
+        .custom-cdn button:hover {
+            background-color: #218838;
+        }
+        .custom-cdn-list {
+            width: calc(100% - 40px);
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .custom-cdn-list div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .custom-cdn-list input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+        .custom-cdn-list button {
+            padding: 10px 15px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+            height: 38px;
+            box-sizing: border-box;
+        }
+        .custom-cdn-list button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Custom CDN Settings</h2>
+    <div class="custom-cdn">
+        <div>
+            <input type="text" id="customCdnTemplate" placeholder="https://example.com/{user}/{repo}/{branch}/{path}">
+            <button id="addCustomCdnButton">Add</button>
+        </div>
+    </div>
+    <div id="cdnList" class="custom-cdn-list"></div>
+    <script src="settings.js"></script>
+</body>
+</html>

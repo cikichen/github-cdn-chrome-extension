@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GitHub Raw to CDN Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            width: 600px;
+            height: auto;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #343a40;
+        }
+
+        #githubUrl {
+            width: calc(100% - 10px);
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            /* 保留圆角效果 */
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* 添加阴影 */
+            transition: all 0.3s ease;
+            background-color: white;
+            /* 背景颜色 */
+            box-sizing: border-box;
+            /* 确保 padding 和 border 在 width 之内 */
+        }
+
+        #githubUrl:focus {
+            border: 1px solid #007bff;
+            /* 添加边框颜色变化 */
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.5);
+            /* 聚焦时增加阴影 */
+            outline: none;
+            /* 移除默认的 outline */
+        }
+
+        .cdn-links,
+        .custom-cdn-container {
+            margin-top: 20px;
+            width: calc(100% - 40px);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cdn-links div,
+        .custom-cdn-item,
+        .custom-cdn-add {
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .cdn-links input,
+        .custom-cdn-item input,
+        .custom-cdn-add input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .cdn-links button,
+        .custom-cdn-item button,
+        .add-cdn-button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+            box-sizing: border-box;
+            height: 40px;
+            /* Ensuring all buttons are the same height */
+            width: 80px;
+            /* Ensuring all buttons have the same width */
+        }
+
+        .cdn-links button:hover,
+        .custom-cdn-item button:hover,
+        .add-cdn-button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-cdn-item button {
+            background-color: #dc3545;
+        }
+
+        .custom-cdn-item button:hover {
+            background-color: #c82333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .settings-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            padding: 0;
+        }
+
+        .settings-button:hover {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Enter GitHub Raw URL</h2>
+    <input type="text" id="githubUrl" placeholder="https://raw.githubusercontent.com/user/repo/branch/path/to/file">
+    <div id="cdnLinks" class="cdn-links"></div>
+    <div id="customCdnContainer" class="custom-cdn-container"
+        style="display: none; margin-top: 20px; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h2 style="color: #343a40; margin-bottom: 15px;">Add Custom CDN</h2>
+        <p style="color: #6c757d; margin-bottom: 15px;">Use the following placeholders in your CDN template URL:</p>
+        <ul style="margin-bottom: 20px;">
+            <li style="color: #495057;">{user}: GitHub username or organization name</li>
+            <li style="color: #495057;">{repo}: GitHub repository name</li>
+            <li style="color: #495057;">{branch}: Branch or tag name</li>
+            <li style="color: #495057;">{path}: File path within the repository</li>
+        </ul>
+        <p style="color: #6c757d; margin-bottom: 15px;">Example CDN template URL:</p>
+        <code
+            style="display: block; margin-bottom: 20px; background-color: #ffffff; padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">https://example.com/raw.githubusercontent.com/{user}/{repo}/{branch}/{path}</code>
+        <div class="custom-cdn-add" style="display: flex; align-items: center; margin-bottom: 15px;">
+            <input type="text" id="customCdn"
+                placeholder="https://example.com/raw.githubusercontent.com/{user}/{repo}/{branch}/{path}"
+                style="flex: 1; padding: 10px 15px; border: 1px solid #ced4da; border-radius: 5px; font-size: 1em;">
+            <button id="addCustomCdn" class="add-cdn-button"
+                style="padding: 10px 20px; background-color: #007bff; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">Add</button>
+        </div>
+        <div id="customCdnList" style="max-height: 200px; overflow-y: auto;"></div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+    <button id="settingsButton" class="settings-button">&#9881;</button>
+    <script src="popup.js"></script>
+</body>
+
+</html>
