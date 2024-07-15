@@ -20,6 +20,7 @@ A Chrome extension to convert GitHub raw URLs to various CDN links. This tool he
 2. Open Chrome and navigate to `chrome://extensions/`.
 3. Enable "Developer mode" by toggling the switch in the top right corner.
 4. Click "Load unpacked" and select the directory where you cloned or extracted this repository.
+5. Alternatively, you can install the extension directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/github-raw-to-cdn-convert/ffggbcmkdfdjjmpbgacfgfnbogcikeac).
 
 ## Usage
 
