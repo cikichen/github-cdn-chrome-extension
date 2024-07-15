@@ -4,9 +4,7 @@
   "version": "1.0",
   "description": "Convert GitHub raw links to CDN links and display them in a floating button on the page",
   "permissions": [
-    "activeTab",
-    "storage",
-    "scripting"
+    "storage"
   ],
   "background": {
     "service_worker": "background.js"

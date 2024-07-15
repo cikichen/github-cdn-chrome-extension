@@ -49,6 +49,14 @@ https://raw.githubusercontent.com/user/repo/branch/path/to/file
 - `https://ghproxy.net/https://raw.githubusercontent.com/user/repo/branch/path/to/file`
 - `https://fastly.jsdelivr.net/gh/user/repo@branch/path/to/file`
 
+## Screenshots
+
+![Screenshot 1](screen/1.png)
+*Main interface of the extension*
+
+![Screenshot 2](screen/2.png)
+*Adding custom CDN templates*
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
